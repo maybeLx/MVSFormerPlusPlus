@@ -1,1 +1,1 @@
-# MVSFormer++: Revealing the Devil in Transformer’s Details for Multi-View Stereo (ICLR2023)
+# MVSFormer++: Revealing the Devil in Transformer’s Details for Multi-View Stereo (ICLR2024)
