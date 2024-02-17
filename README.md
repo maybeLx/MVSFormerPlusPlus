@@ -12,7 +12,7 @@ Codes and models will be released soon.
 If you found our program helpful, please consider citing:
 
 ```
-@inproceedings{dong2022incremental,
+@inproceedings{cao2024mvsformer++,
       title={MVSFormer++: Revealing the Devil in Transformer's Details for Multi-View Stereo}, 
       author={Chenjie Cao, Xinlin Ren and Yanwei Fu},
       booktitle={International Conference on Learning Representations (ICLR)},
