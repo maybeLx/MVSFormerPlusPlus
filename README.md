@@ -15,7 +15,7 @@
 
   ####  Installation
 
-​	Please first see [Flashattention2](https://github.com/Dao-AILab/flash-attention) for original requirements and compilation instructions.
+​	Please first see [FlashAttention2](https://github.com/Dao-AILab/flash-attention) for original requirements and compilation instructions.
 
 ```
 git clone https://github.com/ewrfcas/MVSFormer.git
