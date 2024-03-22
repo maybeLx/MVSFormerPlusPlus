@@ -13,7 +13,7 @@
 
 - [ ] Releasing point cloud of DTU
 
-  ## Installation
+## Installation
 
 ​	Please first see [FlashAttention2](https://github.com/Dao-AILab/flash-attention) for original requirements and compilation instructions.
 
