@@ -60,12 +60,12 @@ Please refer to [MVSFormer](https://github.com/ewrfcas/MVSFormer)
 
 [DINOv2-B](https://dl.fbaipublicfiles.com/dinov2/dinov2_vitb14/dinov2_vitb14_pretrain.pth)
 
-Training MVSFormer++ on DTU with 4 48GB A6000 GPUs cost 2 days. We set the max epoch=15 in DTU.
+Training MVSFormer++ on DTU with 4 48GB A6000 GPUs costs around 1 day. We set the max epoch=15 in DTU.
 
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py --config configs/mvsformer++.json \
                                              --exp_name MVSFormer++ \
-                                            --DDP
+                                             --DDP
 ```
 
 We should finetune our model based on BlendedMVS before the testing on Tanks&Temples.
