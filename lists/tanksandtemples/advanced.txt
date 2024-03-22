@@ -1,0 +1,6 @@
+Palace
+Auditorium
+Ballroom
+Courtroom
+Museum
+Temple

@@ -1,0 +1,214 @@
+{
+    "name": "casmvs",
+    "n_gpu": 4,
+    "fp16": true,
+    "arch": {
+        "bf16": true,
+        "finetune": false,
+        "reset_sche": false,
+        "dtu_model_path": "",
+        "args": {
+            "model_type": "casmvs",
+            "freeze_vit": true,
+            "rescale": 0.4375,
+            "vit_ch": 768,
+            "out_ch": 64,
+            "vit_path": "./pretrained_models/dinov2_vitb14_pretrain.pth",
+            "depth_type": "ce",
+            "fusion_type": "cnn",
+            "inverse_depth": true,
+            "base_ch": [
+                8,
+                8,
+                8,
+                8
+            ],
+            "ndepths": [
+                32,
+                16,
+                8,
+                4
+            ],
+            "feat_chs": [
+                8,
+                16,
+                32,
+                64
+            ],
+            "depth_interals_ratio": [
+                4.0,
+                2.67,
+                1.5,
+                1.0
+            ],
+
+            "decoder_type": "CrossVITDecoder",
+            "dino_cfg": {
+                "use_flash2_dino": false,
+                "softmax_scale": null,
+                "train_avg_length": 762,
+                "cross_interval_layers": 3,
+                "decoder_cfg": {
+                    "init_values": 1.0,
+                    "prev_values": 0.5,
+                    "d_model": 768,
+                    "nhead": 12,
+                    "attention_type": "Linear",
+                    "ffn_type": "ffn",
+                    "softmax_scale": "entropy_invariance",
+                    "train_avg_length": 762,
+                    "self_cross_types": null,
+                    "post_norm": false,
+                    "pre_norm_query": true,
+                    "no_combine_norm": false
+                }
+            },
+            "FMT_config": {
+                "attention_type": "Linear",
+                "base_channel": 8,
+                "d_model": 64,
+                "nhead": 4,
+                "init_values": 1.0,
+                "layer_names": [
+                    "self",
+                    "cross",
+                    "self",
+                    "cross"
+                ],
+                "ffn_type": "ffn",
+                "softmax_scale": "entropy_invariance",
+                "train_avg_length": 12185,
+                "attn_backend": "FLASH2",
+                "self_cross_types": null,
+                "post_norm": false,
+                "pre_norm_query": false
+            },
+            "cost_reg_type": [
+                "PureTransformerCostReg",
+                "Normal",
+                "Normal",
+                "Normal"
+            ],
+
+            "use_pe3d": true,
+            "transformer_config": [
+                {
+                    "base_channel": 8,
+                    "mid_channel": 64,
+                    "num_heads": 4,
+                    "down_rate": [
+                        2,
+                        4,
+                        4
+                    ],
+                    "mlp_ratio": 4,
+                    "layer_num": 6,
+                    "drop": 0.0,
+                    "attn_drop": 0.0,
+                    "position_encoding": true,
+                    "attention_type": "FLASH2",
+                    "softmax_scale": "entropy_invariance",
+                    "train_avg_length": 12185,
+                    "use_pe_proj": true
+                }
+            ]
+
+        },
+        "loss": {
+            "dlossw": [
+                1.0,
+                1.0,
+                1.0,
+                1.0
+            ],
+            "special_loss_stage": [],
+            "logvar_weight": 0.1,
+            "clip_func": "dynamic",
+            "focal": false,
+            "gamma": 2.0
+        }
+    },
+    "data_loader": [
+        {
+            "type": "DTULoader",
+            "args": {
+                "data_set_type": "multi_scale",
+                "datapath": "./MVS_data/DTU/mvs_training",
+                "train_data_list": "lists/dtu/trainval.txt",
+                "val_data_list": "lists/dtu/test.txt",
+                "mode": "train",
+                "nviews": 5,
+                "num_depths": 192,
+                "multi_scale": true,
+                "multi_scale_args": {
+                    "scales": [
+                        [512, 640], [512, 704],[512, 768],
+                        [576, 704],[576, 768],[576, 832],
+                        [640, 832], [640, 896], [640, 960],
+                        [704, 896], [704, 960], [704, 1024],
+                        [768, 960], [768, 1024], [768, 1088],
+                        [832, 1024], [832, 1088], [832, 1152],
+                        [896, 1152], [896, 1216], [896, 1280],
+                        [960, 1216 ], [960, 1280], [960, 1344],
+                        [1024, 1280]
+                    ],
+                    "resize_range": [
+                        1.0,
+                        1.2
+                    ],
+                    "scale_batch_map": {
+                        "512": 4,
+                        "576": 4,
+                        "640": 4,
+                        "704": 4,
+                        "768": 2,
+                        "832": 2,
+                        "896": 2,
+                        "960": 2,
+                        "1024": 2
+                    }
+                },
+                "interval_scale": 1.06,
+                "resize_scale": 1.0,
+                "height": 1024,
+                "width": 1280,
+                "shuffle": true,
+                "batch_size": 16,
+                "random_crop": true,
+                "consist_crop": false,
+                "num_workers": 4,
+                "augment": true,
+                "aug_args": {
+                    "brightness": 0.2,
+                    "contrast": 0.1,
+                    "saturation": 0.1,
+                    "hue": 0.05,
+                    "min_gamma": 0.9,
+                    "max_gamma": 1.1
+                }
+            }
+        }
+    ],
+    "optimizer": {
+        "args": {
+            "lr": 0.001,
+            "vit_lr": 3e-05,
+            "weight_decay": 0.01,
+            "min_lr": 0.01,
+            "warmup_steps": 500
+        }
+    },
+    "trainer": {
+        "epochs": 15,
+        "seq": true,
+        "save_dir": "saved/",
+        "save_period": 1,
+        "verbosity": 2,
+        "logging_every": 100,
+        "early_stop": 10,
+        "tensorboard": false,
+        "depth_scale": 1.0,
+        "eval_freq": 1,
+        "monitor": "min mean_error"
+    }
+}

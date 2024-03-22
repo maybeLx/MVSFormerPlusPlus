@@ -1,0 +1,13 @@
+numpy==1.20.1
+omegaconf==2.1.1
+opencv_python==4.5.5.62
+Pillow==9.3.0
+plyfile==0.7.4
+PyYAML==6.0
+tensorboardX==2.5.1
+timm==0.3.2
+torch==2.0.0
+torchvision==0.15.1+cu117
+torchaudio==2.0.1+cu117
+tqdm==4.59.0
+xformers==0.0.19
