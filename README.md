@@ -1,4 +1,4 @@
-#### MVSFormer++: Revealing the Devil in Transformer’s Details for Multi-View Stereo (ICLR2024)
+## MVSFormer++: Revealing the Devil in Transformer’s Details for Multi-View Stereo (ICLR2024)
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/mvsformer-revealing-the-devil-in-transformer/3d-reconstruction-on-dtu)](https://paperswithcode.com/sota/3d-reconstruction-on-dtu?p=mvsformer-revealing-the-devil-in-transformer)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/mvsformer-revealing-the-devil-in-transformer/point-clouds-on-tanks-and-temples)](https://paperswithcode.com/sota/point-clouds-on-tanks-and-temples?p=mvsformer-revealing-the-devil-in-transformer)
@@ -13,7 +13,7 @@
 
 - [ ] Releasing point cloud of DTU
 
-  ####  Installation
+  ## Installation
 
 ​	Please first see [FlashAttention2](https://github.com/Dao-AILab/flash-attention) for original requirements and compilation instructions.
 
@@ -50,13 +50,13 @@ make
 
 More compile relations could be found in [here](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/)
 
-#### Datasets
+## Datasets
 
 Please refer to [MVSFormer](https://github.com/ewrfcas/MVSFormer)
 
-####  Training
+##  Training
 
-##### Pretrained weights
+## Pretrained weights
 
 [DINOv2-B](https://dl.fbaipublicfiles.com/dinov2/dinov2_vitb14/dinov2_vitb14_pretrain.pth)
 
@@ -64,41 +64,41 @@ Training MVSFormer++ on DTU with 4 48GB A6000 GPUs cost 2 days. We set the max e
 
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py --config configs/mvsformer++.json \
-                                         --exp_name MVSFormer++ \
-                                         --DDP
+                                             --exp_name MVSFormer++ \
+                                            --DDP
 ```
 
 We should finetune our model based on BlendedMVS before the testing on Tanks&Temples.
 
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py --config ./saved/models/DINOv2/mvsformer++/config_ft.json  \
---exp_name MVSFormer++_blendedmvs_dtu_mixed_M0 \
---dataloader_type "BlendedLoader" \
---data_path ${YOUR_BLENDEMVS_PATH}
---dtu_model_path ./saved/models/DINOv2/mvsformer++/model_best.pth \
---finetune \
---balanced_training \
---DDP
+                                             --exp_name MVSFormer++_blendedmvs_dtu_mixed_M0 \
+                                             --dataloader_type "BlendedLoader" \
+                                             --data_path ${YOUR_BLENDEMVS_PATH}
+                                             --dtu_model_path ./saved/models/DINOv2/mvsformer++/model_best.pth \
+                                             --finetune \
+                                             --balanced_training \
+                                             --DDP
 ```
 
-#### Test
+## Test
 
-Pretrained models and additional pair.txt : [OneDrive]()
+Pretrained models and additional pair.txt : [OneDrive](https://1drv.ms/f/s!AnZvbwfkzTydkk0TEvkA7M8cRY92?e=ZjncP5)
 
 For testing on DTU:
 
 ```
 CUDA_VISIBLE_DEVICES=0 python test.py --dataset dtu --batch_size 1  \
---testpath ${dtu_test_path}   --testlist ./lists/dtu/test.txt   \
---resume ${MODEL_WEIGHT_PATH}   \
---outdir ${OUTPUT_DIR}   --interval_scale 1.06 --num_view 5   \
---numdepth 192 --max_h 1152 --max_w 1536 --filter_method gipuma   \
---disp_threshold 0.1 --num_consistent 2 --prob_threshold 0.5
+                                      --testpath ${dtu_test_path}   --testlist ./lists/dtu/test.txt   \
+                                      --resume ${MODEL_WEIGHT_PATH}   \
+                                      --outdir ${OUTPUT_DIR}   --interval_scale 1.06 --num_view 5   \
+                                      --numdepth 192 --max_h 1152 --max_w 1536 --filter_method gipuma   \
+                                      --disp_threshold 0.1 --num_consistent 2 --prob_threshold 0.5
 ```
 
 
 
-#### Cite
+## Cite
 
 If you found our program helpful, please consider citing:
 
