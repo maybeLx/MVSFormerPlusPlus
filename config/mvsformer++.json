@@ -14,7 +14,7 @@
             "vit_ch": 768,
             "out_ch": 64,
             "vit_path": "./pretrained_models/dinov2_vitb14_pretrain.pth",
-            "depth_type": "ce",
+            "depth_type": ["ce","ce","ce","ce"],
             "fusion_type": "cnn",
             "inverse_depth": true,
             "base_ch": [
