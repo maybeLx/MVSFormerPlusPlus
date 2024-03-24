@@ -63,7 +63,7 @@ Please refer to [MVSFormer](https://github.com/ewrfcas/MVSFormer)
 Training MVSFormer++ on DTU with 4 48GB A6000 GPUs costs around 1 day. We set the max epoch=15 in DTU.
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py --config configs/mvsformer++.json \
+CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py --config config/mvsformer++.json \
                                              --exp_name MVSFormer++ \
                                              --DDP
 ```
