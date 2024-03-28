@@ -256,7 +256,7 @@ def save_depth(testlist, config):
             cams = sample["proj_matrices"]["stage{}".format(num_stage)].numpy()
             print('Iter {}/{}, Time:{} Res:{}'.format(batch_idx, len(test_data_loader), end_time - start_time,
                                                       outputs["refined_depth"][0].shape))
-            pdb.set_trace()
+           
             # save depth maps and confidence maps
             idx = 0
             for filename, cam, img, depth_est, photometric_confidence in zip(filenames, cams, imgs, outputs["refined_depth"], outputs["photometric_confidence"]):
