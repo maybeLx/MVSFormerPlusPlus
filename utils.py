@@ -463,14 +463,10 @@ def get_lr_schedule_with_warmup(optimizer, num_warmup_steps, total_steps, min_lr
 def get_parameter_groups(opt_args, model, freeze_vit=None):
     param_groups = []
     # normal params
-    param_groups.append({"params": [p for n, p in model.named_parameters() if p.requires_grad and not n.startswith("vit.") and not n.startswith('encoder.')],
+    param_groups.append({"params": [p for n, p in model.named_parameters() if p.requires_grad and not n.startswith("vit.") ],
                          'lr': opt_args['lr'], 'weight_decay': 0.0}  )
 
-    # if opt_args.get('vgg_lr', -1) > -1:
-    vgg_lr = opt_args.get('vgg_lr', 1e-3)
-    param_groups.append(
-        {"params": [p for n, p in model.named_parameters() if p.requires_grad and n.startswith("encoder.")],
-         'lr': vgg_lr, 'weight_decay': 0.0})
+   
 
     # vit params
     if freeze_vit is False:
