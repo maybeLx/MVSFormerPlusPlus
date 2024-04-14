@@ -548,18 +548,18 @@ if __name__ == '__main__':
     # step1. save all the depth maps and the masks in outputs directory
     save_depth(testlist, config)
 
-    # # step2. filter saved depth maps with photometric confidence maps and geometric constraints
-    # if args.filter_method == "pcd" or args.filter_method == "dpcd":
-    #     # support multi-processing, the default number of worker is 4
-    #     pcd_filter(testlist)
-    #
-    # elif args.filter_method == 'gipuma':
-    #     prob_threshold = args.prob_threshold
-    #     # prob_threshold = [float(p) for p in prob_threshold.split(',')]
-    #     gipuma_filter(testlist, args.outdir, prob_threshold, args.disp_threshold, args.num_consistent,
-    #                   args.fusibile_exe_path)
-    # else:
-    #     raise NotImplementedError
-    #
-    # # remove some unneeded data
-    # rm_data(testlist, args.outdir)
+    # step2. filter saved depth maps with photometric confidence maps and geometric constraints
+    if args.filter_method == "pcd" or args.filter_method == "dpcd":
+        # support multi-processing, the default number of worker is 4
+        pcd_filter(testlist)
+    
+    elif args.filter_method == 'gipuma':
+        prob_threshold = args.prob_threshold
+        # prob_threshold = [float(p) for p in prob_threshold.split(',')]
+        gipuma_filter(testlist, args.outdir, prob_threshold, args.disp_threshold, args.num_consistent,
+                      args.fusibile_exe_path)
+    else:
+        raise NotImplementedError
+    
+    # remove some unneeded data
+    rm_data(testlist, args.outdir)
