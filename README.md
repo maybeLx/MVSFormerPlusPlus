@@ -135,7 +135,7 @@ CUDA_VISIBLE_DEVICES=0 python test.py --dataset dtu --batch_size 1  \
                                       --testpath ${scene_test_path}   --testlist ${scene_test_list}   \
                                       --resume ${MODEL_WEIGHT_PATH}   \
                                       --outdir ${OUTPUT_DIR}   --interval_scale 1.06 --num_view 5   \
-                                      --numdepth 192 --max_h 1152 --max_w 1536 --filter_method dpcd   \
+                                      --numdepth 192 --max_h ${max_h} --max_w ${max_w} --filter_method dpcd   \
                                       --conf 0.5
 ```
 
@@ -151,3 +151,6 @@ If you found our program helpful, please consider citing:
       year={2024}
 }
 ```
+
+## Acknowledgments
+We borrow the code from [VisMVSNet](https://github.com/jzhangbs/Vis-MVSNet), [MVSFormer](https://github.com/ewrfcas/MVSFormer). We express gratitude for these works' contributions!
