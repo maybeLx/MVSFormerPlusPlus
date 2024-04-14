@@ -96,6 +96,48 @@ CUDA_VISIBLE_DEVICES=0 python test.py --dataset dtu --batch_size 1  \
                                       --disp_threshold 0.1 --num_consistent 2 --prob_threshold 0.5
 ```
 
+## Test on your own data
+Our MVSFormer++ requires camera parameters and view selection file. If you do not have them, you can use 'Colmap' to estimate cameras and convert them to MVSNet format by 'colmap2mvsnet.py'. Please arrange your files as follows.
+```
+- <dense_folder>
+    - images_col  # input images of Colmap
+    - sparse_col  # SfM output from colmap in .txt format
+    - cams        # output MVSNet cameras, to be generated
+    - images      # output MVSNet input images, to be generated
+    - pair.txt    # output view selection file, to be generated
+```
+An example of running 'Colmap'
+```
+colmap feature_extractor \
+    --database_path <dense_folder>/database.db \
+    --image_path <dense_folder>/images_col
+
+colmap exhaustive_matcher \
+    --database_path <dense_folder>/database.db
+
+colmap mapper \
+    --database_path <dense_folder>/database.db \
+    --image_path <dense_folder>/images_col \
+    --output_path <dense_folder>/sparse_col
+
+colmap model_converter \
+    --input_path <dense_folder>/sparse_col/0 \
+    --output_path <dense_folder>/sparse_col \
+    --output_type TXT
+```
+Run 'colmap2mvsnet.py' by
+```
+python colmap2mvsnet.py --dense_folder <dense_folder> --max_d 256 --convert_format
+```
+Please note that: the resolution of input images must be divisible by 64. we can change the parameter of 'max_h' and 'max_w'. For test on your own dataset:
+```
+CUDA_VISIBLE_DEVICES=0 python test.py --dataset dtu --batch_size 1  \
+                                      --testpath ${scene_test_path}   --testlist ${scene_test_list}   \
+                                      --resume ${MODEL_WEIGHT_PATH}   \
+                                      --outdir ${OUTPUT_DIR}   --interval_scale 1.06 --num_view 5   \
+                                      --numdepth 192 --max_h 1152 --max_w 1536 --filter_method dpcd   \
+                                      --conf 0.5
+```
 
 
 ## Cite
