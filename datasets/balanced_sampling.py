@@ -67,12 +67,8 @@ class CustomConcatDataset(Dataset[T_co]):
     def reset_dataset(self, shuffled_idx):
         # dtu
 
-
         for di in range(len(self.datasets)):
             self.datasets[di].idx_map = {}
-            self.datasets[di].reset_multi_ratio()
-        self.scale2idx = self.datasets[-1].scale2idx
-        self.scale_batch_map = self.datasets[-1].scale_batch_map
 
         barrel_idx = 0
         count = 0
