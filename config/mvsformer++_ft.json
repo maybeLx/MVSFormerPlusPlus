@@ -63,6 +63,7 @@
                     "no_combine_norm": false
                 }
             },
+             "use_FMT": true,
              "FMT_config": {
                 "attention_type": "Linear",
                 "base_channel": 8,
@@ -133,13 +134,13 @@
             "type": "BlendedLoader",
             "args": {
                 "data_set_type": "multi_scale",
-                "datapath": "./MVS_data/BlendedMVS_raw",
+                "datapath": "/home/rxl/data/3D_dataset/MVS_data/BlendedMVS_raw",
                 "train_data_list": "lists/blended/training_list.txt",
                 "val_data_list": "lists/blended/validation_list.txt",
-                "dtu_datapath": "./MVS_data/mvs_training",
+                "dtu_datapath": "/home/rxl/data/3D_dataset/MVS_data/DTU/mvs_training",
                 "dtu_train_data_list": "lists/dtu/trainval.txt",
                 "dtu_val_data_list": "lists/dtu/test.txt",
-                "blended_datapath": "./MVS_data/BlendedMVS_raw",
+                "blended_datapath": "/home/rxl/data/3D_dataset/MVS_data/BlendedMVS_raw",
                 "blended_train_data_list": "lists/blended/training_list.txt",
                 "blended_val_data_list": "lists/blended/validation_list.txt",
                 "mode": "train",
