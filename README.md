@@ -71,7 +71,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py --config config/mvsformer++.json \
 We should finetune our model based on BlendedMVS before the testing on Tanks&Temples.
 
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py --config ./saved/models/DINOv2/mvsformer++/config_ft.json  \
+CUDA_VISIBLE_DEVICES=0,1,2,3 python train.py --config ./saved/models/DINOv2/mvsformer++/mvsformer++_ft.json  \
                                              --exp_name MVSFormer++_blendedmvs_dtu_mixed_M0 \
                                              --dataloader_type "BlendedLoader" \
                                              --data_path ${YOUR_BLENDEMVS_PATH}
