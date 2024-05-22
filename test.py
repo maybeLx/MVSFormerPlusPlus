@@ -80,6 +80,10 @@ parser.add_argument('--combine_conf', action='store_true')
 parser.add_argument('--combine_reg_conf', action='store_true')
 parser.add_argument('--tmps', default="5,5,5,1", type=str)
 
+# filter by dpcd
+parser.add_argument('--dist_base', type=float, default=4.0)
+parser.add_argument('--rel_diff_base', type=float, default=1300)
+
 # parse arguments and check
 args = parser.parse_args()
 print("argv:", sys.argv[1:])
