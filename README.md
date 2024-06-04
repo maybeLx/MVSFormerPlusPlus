@@ -9,7 +9,7 @@
 
 - [x] Releasing pre-trained models trained on DTU
 
-- [ ] Releasing pre-trained models fine-tuned on Tanks&Temples and test code.
+- [x] Releasing pre-trained models fine-tuned on Tanks&Temples and test code.
 
 - [ ] Releasing point cloud of DTU
 
