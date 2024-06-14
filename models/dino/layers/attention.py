@@ -92,7 +92,7 @@ class Attention(nn.Module):
         #
         # x = (attn @ v).transpose(1, 2).reshape(B, N, C)
 
-        # use F.scaled_dot_product_attention for torch>=2.0
+        # use F.scaled_dot_product_attention for torch>=2.1 with custom scale
         x = F.scaled_dot_product_attention(q, k, v, scale=softmax_scale)
         x = x.transpose(1, 2).reshape(B, N, C)
 

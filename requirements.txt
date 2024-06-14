@@ -6,8 +6,8 @@ plyfile==0.7.4
 PyYAML==6.0
 tensorboardX==2.5.1
 timm==0.3.2
-torch==2.0.0
-torchvision==0.15.1+cu117
-torchaudio==2.0.1+cu117
+torch==2.1.2
+torchvision==0.16.2
+torchaudio==2.1.2
 tqdm==4.59.0
 xformers==0.0.19
