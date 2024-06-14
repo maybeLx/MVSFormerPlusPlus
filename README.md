@@ -15,7 +15,7 @@
 
 ## Installation
 
-​	Please first see [FlashAttention2](https://github.com/Dao-AILab/flash-attention) for original requirements and compilation instructions.
+​	Please first see [FlashAttention2](https://github.com/Dao-AILab/flash-attention) for original requirements and compilation instructions, or you should make sure torch>=2.0.0 to use ```F.scaled_dot_product_attention```.
 
 ```
 git clone https://github.com/ewrfcas/MVSFormer.git
