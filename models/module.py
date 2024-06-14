@@ -320,8 +320,6 @@ class CrossVITDecoder(nn.Module):
         self.upsampler1 = nn.Sequential(nn.ConvTranspose2d(ch * 2, ch, 4, stride=2, padding=1),
                                         nn.BatchNorm2d(ch), nn.SiLU())
 
-
-
     def forward(self, x, Fmats=None, vit_shape=None):  # [B,V,HW,C]*N, Fmats:[B,V-1,HW,HW]
         B, V, H, W, C = vit_shape
         # x:[B,V,HW,C]*N
@@ -338,7 +336,7 @@ class CrossVITDecoder(nn.Module):
                     else:
                         attn_inputs = {'x': ref_feat_list[-1]}
                         pre_ref_feat = self.self_attn_blocks[i - 1](**attn_inputs)
-                        new_ref_feat = self.prev_values[i - 1] * pre_ref_feat + x[i][:, v] # AAS
+                        new_ref_feat = self.prev_values[i - 1] * pre_ref_feat + x[i][:, v]  # AAS
                         if not self.no_combine_norm:
                             new_ref_feat = self.norm_layers[i - 1](new_ref_feat)
                         ref_feat_list.append(new_ref_feat)
@@ -706,10 +704,16 @@ def init_inverse_range(cur_depth, ndepths, device, dtype, H, W):
     return 1. / inverse_depth_hypo
 
 
-def schedule_inverse_range(depth, depth_hypo, ndepths, split_itv, H, W):
+def schedule_inverse_range(depth, depth_hypo, ndepths, split_itv, H, W, shift=False):
     last_depth_itv = 1. / depth_hypo[:, 2, :, :] - 1. / depth_hypo[:, 1, :, :]
     inverse_min_depth = 1 / depth + split_itv * last_depth_itv  # B H W
     inverse_max_depth = 1 / depth - split_itv * last_depth_itv  # B H W
+
+    if shift:  # shift is used to prevent negative depth prediction. 0.002 is set when the max depth range is 500
+        is_neg = (inverse_max_depth < 0.002).float()
+        inverse_max_depth = inverse_max_depth - (inverse_max_depth - 0.002) * is_neg
+        inverse_min_depth = inverse_min_depth - (inverse_max_depth - 0.002) * is_neg
+
     # cur_depth_min, (B, H, W)
     # cur_depth_max: (B, H, W)
     itv = torch.arange(0, ndepths, device=inverse_min_depth.device, dtype=inverse_min_depth.dtype,
@@ -739,6 +743,7 @@ def schedule_range(cur_depth, ndepth, depth_inteval_pixel, H, W):
 
 if __name__ == '__main__':
     import torchsummary
+
     model = PureTransformerCostReg(in_channels=64).cuda()
     x = torch.rand(1, 64, 32, 64, 80).cuda()
     # x = torch.rand(1, 64, 32, 144, 160).cuda()
