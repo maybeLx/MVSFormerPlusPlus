@@ -564,6 +564,7 @@ if __name__ == '__main__':
                       args.fusibile_exe_path)
     else:
         raise NotImplementedError
-    
-    # remove some unneeded data
-    rm_data(testlist, args.outdir)
+
+    if args.filter_method == 'gipuma':
+        # remove some unneeded data
+        rm_data(testlist, args.outdir)
