@@ -16,6 +16,7 @@ import pdb
 import torch
 from torch import Tensor
 from torch import nn
+import torch.nn.functional as F
 logger = logging.getLogger("dinov2")
 
 try:
@@ -81,14 +82,20 @@ class Attention(nn.Module):
         softmax_scale = self.scale
         if self.softmax_scale == "entropy_invariance":
             softmax_scale *= math.log(N, self.train_avg_length)
-        q *= softmax_scale
 
-        attn = q @ k.transpose(-2, -1)
+        # q *= softmax_scale
+        #
+        # attn = q @ k.transpose(-2, -1)
+        #
+        # attn = attn.softmax(dim=-1)
+        # # attn = self.attn_drop(attn)
+        #
+        # x = (attn @ v).transpose(1, 2).reshape(B, N, C)
 
-        attn = attn.softmax(dim=-1)
-        # attn = self.attn_drop(attn)
+        # use F.scaled_dot_product_attention for torch>=2.0
+        x = F.scaled_dot_product_attention(q, k, v, scale=softmax_scale)
+        x = x.transpose(1, 2).reshape(B, N, C)
 
-        x = (attn @ v).transpose(1, 2).reshape(B, N, C)
         x = self.proj(x)
         x = self.proj_drop(x)
         return x
