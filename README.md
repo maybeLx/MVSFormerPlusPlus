@@ -11,7 +11,7 @@
 
 - [x] Releasing pre-trained models fine-tuned on Tanks&Temples and test code.
 
-- [ ] Releasing point cloud of DTU
+- [x] NEWS! Updating a script to process mvs data with depth range free cameras (such as nerf transforms.json)
 
 ## Installation
 
