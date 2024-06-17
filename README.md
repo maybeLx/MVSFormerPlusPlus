@@ -11,7 +11,7 @@
 
 - [x] Releasing pre-trained models fine-tuned on Tanks&Temples and test code.
 
-- [x] Updating a script to process mvs data with depth range free cameras (such as nerf transforms.json)
+- [x] **NEWS**: Updating a script to process mvs data with depth range free cameras (such as nerf transforms.json)
 
 ## Installation
 
@@ -130,7 +130,7 @@ Run `colmap2mvsnet.py` by
 python colmap2mvsnet.py --dense_folder <dense_folder> --max_d 256 --convert_format
 ```
 For poses without sparse points (nerf poses), which is necessary for achieving depth range, we recommend use ```nerf2mvsnet.py``` instead.
-Note that you should action ```nerf2opencv``` to to process nerf poses with different coordinates.
+Note that you should activate ```nerf2opencv``` to to process nerf poses with different coordinates.
 ```
 python nerf2mvsnet.py --dense_folder <dense_folder> --max_d 256 --save_ply --nerf2opencv
 ```
