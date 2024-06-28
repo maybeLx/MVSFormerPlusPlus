@@ -295,11 +295,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     image_dir = os.path.join(args.dense_folder, 'images_col')  # origin images' path
-    model_dir = os.path.join(args.dense_folder, 'sparse_col')  # colmap path
+    model_dir = os.path.join(args.dense_folder, 'sparse')  # colmap path
     cam_dir = os.path.join(args.dense_folder, 'cams')  # the path you want to save cameras
     renamed_dir = os.path.join(args.dense_folder, 'images')  # the path you want to resave images with new order
 
-    cameras, images, points3d = read_model(model_dir, '.txt')
+    cameras, images, points3d = read_model(model_dir, '.bin')
     num_images = len(list(images.items()))
 
     param_type = {
