@@ -124,10 +124,16 @@ colmap model_converter \
     --input_path <dense_folder>/sparse_col/0 \
     --output_path <dense_folder>/sparse_col \
     --output_type TXT
+
+colmap image_undistorter --image_path <dense_folder>/images_col \
+        --input_path <dense_folder>/sparse_col/0 \
+        --output_path <dense_folder>/undistorted  \
+        --output_type COLMAP
+
 ```
 Run `colmap2mvsnet.py` by
 ```
-python colmap2mvsnet.py --dense_folder <dense_folder> --max_d 256 --convert_format
+python colmap2mvsnet.py --dense_folder <dense_folder>/undistorted --max_d 256 --convert_format
 ```
 For poses without sparse points (nerf poses), which is necessary for achieving depth range, we recommend use ```nerf2mvsnet.py``` instead.
 Note that you should activate ```nerf2opencv``` to to process nerf poses with different coordinates.
