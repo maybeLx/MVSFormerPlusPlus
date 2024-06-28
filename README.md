@@ -130,6 +130,7 @@ colmap image_undistorter --image_path <dense_folder>/images_col \
         --input_path <dense_folder>/sparse_col/0 \
         --output_path <dense_folder>/undistorted  \
         --output_type COLMAP
+cd <dense_folder>/undistorted && mv images images_col
 
 ```
 Run `colmap2mvsnet.py` by
