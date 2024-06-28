@@ -105,6 +105,7 @@ Our MVSFormer++ requires camera parameters and view selection file. If you do no
     - cams        # output MVSNet cameras, to be generated
     - images      # output MVSNet input images, to be generated
     - pair.txt    # output view selection file, to be generated
+    - undistorted  # undistorted images folder, contains cams, images, pair.txt, sparse
 ```
 An example of running `Colmap`
 ```
