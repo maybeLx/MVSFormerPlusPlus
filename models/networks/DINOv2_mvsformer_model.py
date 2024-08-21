@@ -134,7 +134,7 @@ class DINOv2MVSNet(nn.Module):
                     depth_samples = init_inverse_range(depth_values, self.ndepths[stage_idx], imgs.device, imgs.dtype,
                                                        H, W)
                 else:
-                    depth_samples = init_inverse_range(depth_values, self.ndepths[stage_idx], imgs.device,
+                    depth_samples = init_range(depth_values, self.ndepths[stage_idx], imgs.device,
                                                              imgs.dtype, H, W)
             else:
                 if self.inverse_depth:
