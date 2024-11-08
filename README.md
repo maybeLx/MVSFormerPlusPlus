@@ -9,7 +9,7 @@
 
 - [x] Releasing pre-trained models trained on DTU
 
-- [x] Releasing pre-trained models fine-tuned on Tanks&Temples and test code.
+- [x] Releasing pre-trained models fine-tuned on BlendedMVS and test code.
 
 - [x] **NEWS**: Updating a script to process mvs data with depth range free cameras (such as nerf transforms.json)
 
@@ -145,7 +145,7 @@ python nerf2mvsnet.py --dense_folder <dense_folder> --max_d 256 --save_ply --ner
 
 Please note that: the resolution of input images must be divisible by 64. we can change the parameter of `max_h` and `max_w`. For test on your own dataset:
 ```
-CUDA_VISIBLE_DEVICES=0 python test.py --dataset dtu --batch_size 1  \
+CUDA_VISIBLE_DEVICES=0 python test.py --dataset mydataset --batch_size 1  \
                                       --testpath ${scene_test_path}   --testlist ${scene_test_list}   \
                                       --resume ${MODEL_WEIGHT_PATH}   \
                                       --outdir ${OUTPUT_DIR}   --interval_scale 1.06 --num_view 5   \
