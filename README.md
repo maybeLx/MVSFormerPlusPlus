@@ -95,6 +95,8 @@ CUDA_VISIBLE_DEVICES=0 python test.py --dataset dtu --batch_size 1  \
                                       --numdepth 192 --max_h 1152 --max_w 1536 --filter_method gipuma   \
                                       --disp_threshold 0.1 --num_consistent 2 --prob_threshold 0.5
 ```
+For testing on Tanks&Temple:
+You can run `test_tt_adv.sh` and `test_tt_inter.sh` in the scripts. Please specify the `${MODEL_WEIGHT_PATH}` and `${OUTPUT_DIR}`. We recommend using the checkpoint (`tnt_ckpt` available on [OneDrive](https://1drv.ms/f/s!AnZvbwfkzTydkk0TEvkA7M8cRY92?e=ZjncP5)) for testing on this dataset.
 
 ## Test on your own data
 Our MVSFormer++ requires camera parameters and view selection file. If you do not have them, you can use `Colmap` to estimate cameras and convert them to MVSNet format by `colmap2mvsnet.py`. Please arrange your files as follows.
