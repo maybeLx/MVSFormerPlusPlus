@@ -67,7 +67,7 @@ parser.add_argument('--thres_disp', type=float, default=1.0, help='threshold of 
 parser.add_argument('--downsample', type=float, default=None, help='downsampling point cloud')
 
 # filter by gimupa
-parser.add_argument('--fusibile_exe_path', type=str, default='./fusibile')
+parser.add_argument('--fusibile_exe_path', type=str, default='./fusibile/fusibile')
 parser.add_argument('--prob_threshold', type=float, default=0.5)
 parser.add_argument('--disp_threshold', type=float, default='0.2')
 parser.add_argument('--num_consistent', type=float, default='3')
